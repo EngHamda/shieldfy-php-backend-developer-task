@@ -30,6 +30,7 @@ $app = new Laravel\Lumen\Application(
 $app->configure('app');
 //Note:we don't need below line
 // $app->configure('database');
+$app->configure('cors');
 
 
 /**
@@ -42,6 +43,7 @@ $app->configure('app');
  *       - use  $app->withFacades(); for validator
  */
 $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+$app->register(Barryvdh\Cors\ServiceProvider::class);
 
 $app->withFacades();
 
@@ -79,13 +81,15 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
+$app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+	\Barryvdh\Cors\HandleCors::class,
+]);
 
-// $app->routeMiddleware([
+$app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+	'cors' => \Barryvdh\Cors\HandleCors::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
