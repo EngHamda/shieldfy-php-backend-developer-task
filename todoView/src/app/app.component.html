@@ -1,0 +1,87 @@
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav mode="push">
+    <div class="branding"><img [src]="logo" />
+      <span data-testid="title">{{'todo.title.short' | translate}}</span></div>
+    <mat-nav-list>
+      <!--for small nav list http://localhost:4200/#/examples/todos -->
+      <!--replace place holder by models OR content -->
+      <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]"
+        routerLinkActive="active">
+        {{item.label | translate}}
+      </a>
+      <a mat-list-item href="https://github.com/EngHamda/shieldfy-php-backend-developer-task" target="_blank">
+        Github
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div class="wrapper">
+
+    <div class="toolbar" [style.position]="isHeaderSticky ? 'fixed' : 'inherit'" [class.mat-elevation-z4]="isHeaderSticky">
+      <mat-toolbar color="primary">
+        <button mat-icon-button class="d-md-none" (click)="sidenav.open()">
+          <fa-icon icon="bars"></fa-icon>
+
+        </button>
+
+        <!-- head title start -->
+        <span routerLink="" class="branding spacer center d-inline d-sm-none">
+          <img [src]="logo" /></span>
+        <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none">
+          <img [src]="logo" />{{'todo.title.short' | translate}}
+        </span>
+        <span routerLink="" class="branding spacer d-none d-md-inline">
+          <img [src]="logo" /> {{'todo.title.long' | translate}}
+        </span>
+        <!-- head title end -->
+
+        <!-- for setting menu -->
+        <button mat-icon-button routerLink="settings" class="d-none d-sm-inline">
+          <fa-icon icon="cog"></fa-icon>
+        </button>
+
+        <!-- for app link on github -->
+        <a [matTooltip]="'todo.header.github' | translate"
+           matTooltipPosition="before"
+           mat-icon-button
+           class="link d-none d-sm-inline"
+           href="https://github.com/EngHamda/shieldfy-php-backend-developer-task"
+           target="_blank">
+          <fa-icon [icon]="['fab','github']"></fa-icon>
+        </a>
+
+        <!-- for language menu -->
+        <span>
+          <mat-select [ngModel]="settings?.language" (selectionChange)="onLanguageSelect($event)">
+            <mat-option *ngFor="let l of languages" [value]="l">
+              {{ l.toUpperCase() }}
+            </mat-option>
+          </mat-select>
+        </span>
+      </mat-toolbar>
+    </div>
+    <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.path">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
+
+    <!-- footer start -->
+    <div class="footer">
+      <div class="row">
+        <div class="col-12 signature">
+          &#169; <span class="year" data-testid="footer-year">{{year}}</span> - Nourhan Hamda
+          <br class="d-block d-sm-none">
+          <a [matTooltip]="'todo.footer.changelog' | translate"
+             matTooltipPosition="before"
+             href="https://github.com/tomastrajan/angular-ngrx-material-starter/blob/master/CHANGELOG.md">
+            <fa-icon icon="rocket"></fa-icon>
+            {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- footer end -->
+
+  </div>
+
+</mat-sidenav-container>

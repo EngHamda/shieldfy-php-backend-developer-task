@@ -1,0 +1,37 @@
+.entry {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.categories-filter-info {
+  float: right;
+  font-weight: normal;
+}
+
+.categories-filter {
+  float: right;
+  position: relative;
+  left: 10px;
+  top: -5px;
+  margin-left: -10px;
+}
+
+.category {
+  display: flex;
+  margin-bottom: 10px;
+
+  .category-done {
+    margin: 0 20px 0 0;
+  }
+
+  .category-label {
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+
+    &.category-label-done {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+  }
+}

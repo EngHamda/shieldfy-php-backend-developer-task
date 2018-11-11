@@ -1,0 +1,78 @@
+<div class="container" *ngIf="(categories) as categoryItems">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 entry">
+      <todo-big-input [placeholder]="'todo.examples.categories.input' | translate" [value]="newCategory"
+                      (keyup)="onNewCategoryChange($event.target.value)"
+                      (keyup.enter)="!isAddCategoryDisabled && onAddCategory()"
+                      (keyup.escape)="onNewCategoryClear()">
+        <!-- [disabled] for set button unclickable-->
+        <todo-big-input-action ariaLabel="add category" fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent"
+                               (action)="onAddCategory()"
+                               [disabled]="isAddCategoryDisabled"
+                               [matTooltip]="'todo.examples.categories.tooltip.add' | translate"
+                               matTooltipPosition="before">
+        </todo-big-input-action>
+      </todo-big-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>
+        {{ 'todo.examples.categories.list' | translate }}
+        <mat-chip-list class="categories-filter-info d-none d-sm-block d-md-none d-lg-block">
+          <mat-chip [disabled]=true [ngPlural]="categoryItems.length">
+            {{ 'todo.examples.categories.filter.description' | translate }}
+            <ng-template ngPluralCase="other">{{ categoryItems.length }} {{ 'todo.examples.categories.filter.categories' |
+              translate }}</ng-template>
+            <ng-template ngPluralCase="=1">{{ 'todo.examples.categories.filter.one' | translate }} {{
+              'todo.examples.categories.filter.category' | translate }}</ng-template>
+            <ng-template ngPluralCase="=0">{{ 'todo.examples.categories.filter.none' | translate }} {{
+              'todo.examples.categories.filter.categories' | translate }}</ng-template>
+          </mat-chip>
+        </mat-chip-list>
+      </h2>
+      <mat-card *ngFor="let category of categoryItems; let categoryKey = index" class="category" [ngClass]="routeAnimationsElements" data-testid="category-item">
+      <span class="category-label">
+        {{category.name}}
+      </span>
+        <todo-big-input-action ariaLabel="remove done categories" fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn"
+                               (action)="onRemoveCategory(category._id, categoryKey)"
+                               matTooltip="Remove done categories"
+                               [matTooltip]="'todo.examples.categories.tooltip.remove' | translate"
+                               matTooltipPosition="after">
+        </todo-big-input-action>
+        <todo-big-input-action ariaLabel="add category" fontSet="fas" fontIcon="fa-bars" faIcon="bars" color="accent"
+                               (action)="onShowCategoryTasks(categoryKey)"
+                               [matTooltip]="'todo.examples.categories.tooltip.show' | translate"
+                               matTooltipPosition="before">
+        </todo-big-input-action>
+      </mat-card>
+      <br>
+      <br>
+    </div>
+    <div class="offset-md-1 col-md-5">
+      <h2>{{ 'todo.examples.categories.tasks.list' | translate }}</h2>
+      <hr>
+      <div *ngIf="!isListCategoryTasks;else listTasks" class="category-tasks">
+        <p>
+          {{ 'todo.examples.categories.tasks.text1' | translate }}
+          <todo-big-input-action fontSet="fas" fontIcon="fa-bars" faIcon="bars">
+          </todo-big-input-action>
+          {{ 'todo.examples.categories.tasks.text2' | translate }}
+        </p>
+        <br>
+      </div>
+      <ng-template #listTasks>
+        <div *ngIf="!categoryTasks?.length > 0">
+          {{ 'todo.examples.categories.tasks.empty' | translate }}
+        </div>
+        <div *ngIf="categoryTasks?.length > 0">
+          <mat-card *ngFor="let task of categoryTasks" class="category" data-testid="tasks-item">
+            <h3 data-testid="item-title">{{task.title}}</h3>
+            <!--<small>{{task.description}}</small>-->
+          </mat-card>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

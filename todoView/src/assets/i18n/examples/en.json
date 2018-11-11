@@ -1,0 +1,52 @@
+{
+  "todo.examples.menu.categories": "Categories",
+  "todo.examples.menu.tasks": "Tasks",
+
+  "todo.examples.tasks.title": "Tasks List",
+  "todo.examples.tasks.subtitle1": "Your tasks",
+  "todo.examples.tasks.empty": "Looks like you don't have any tasks, let's add some!",
+  "todo.examples.tasks.subtitle2": "Task editor",
+  "todo.examples.tasks.tooltip.edit": "Edit task",
+  "todo.examples.tasks.tooltip.delete": "Delete task",
+  "todo.examples.tasks.tooltip.deselect": "Deselect task",
+  "todo.examples.tasks.placeholder0": "Id",
+  "todo.examples.tasks.placeholder1": "Title",
+  "todo.examples.tasks.placeholder2": "Description",
+  "todo.examples.tasks.placeholder3": "Category",
+  "todo.examples.tasks.error": "is required",
+  "todo.examples.tasks.save": "Save",
+  "todo.examples.tasks.cancel": "Cancel",
+  "todo.examples.tasks.text": "Tasks can be managed in this editor and are added, deleted and selected",
+  "todo.examples.tasks.add": "Add a new task",
+  "todo.examples.tasks.new": "New",
+
+  "todo.examples.title": "Select Collection",
+
+  "todo.examples.categories.input": "New Category Name...",
+  "todo.examples.categories.tooltip.add": "Add new category",
+  "todo.examples.categories.tooltip.show": "Show Category Tasks",
+  "todo.examples.categories.tooltip.remove": "Remove Category",
+  "todo.examples.categories.filter.all": "All",
+  "todo.examples.categories.filter.done": "Done",
+  "todo.examples.categories.filter.active": "Active",
+  "todo.examples.categories.filter.description": "Displaying",
+  "todo.examples.categories.filter.categories": "categories",
+  "todo.examples.categories.filter.one": "one",
+  "todo.examples.categories.filter.category": "category",
+  "todo.examples.categories.filter.none": "none",
+
+  "todo.examples.categories.list": "Category list",
+  "todo.examples.categories.tasks.list": "Category Tasks List",
+  "todo.examples.categories.tasks.text1": "Click on",
+  "todo.examples.categories.tasks.text2": "to list tasks of this category",
+  "todo.examples.categories.tasks.empty": "No Tasks exist in This Category",
+
+  "todo.examples.categories.added.notification": "Category with name ( {{name}} ) added",
+  "todo.examples.tasks.added.notification": "Task with title ( {{title}} ) added",
+
+  "anms.examples.todos.example": "Todo example",
+  "anms.examples.todos.filter.notification": "Filtered to",
+  "anms.examples.todos.remove.notification": "Removed done todos",
+  "anms.examples.todos.toggle.notification": "Toggled {{name}} to",
+  "anms.examples.todos.undo": "Undo"
+}

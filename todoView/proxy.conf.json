@@ -1,0 +1,11 @@
+{
+  "/api/*": {
+    "target": "http://todo.tst",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

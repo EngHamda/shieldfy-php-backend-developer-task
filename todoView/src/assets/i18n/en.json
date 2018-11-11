@@ -1,0 +1,29 @@
+{
+  "todo.footer.changelog": "Show changelog",
+  "todo.header.github": "Project Github Repository",
+
+  "anms.menu.examples": "Examples",
+  "anms.menu.about": "About",
+  "anms.menu.features": "Features",
+
+  "todo.menu.settings": "Settings",
+  "todo.title.long": "Todo List Application",
+  "todo.title.short": "Todo List",
+  "todo.settings.title": "Settings",
+
+  "todo.settings.general.language.en": "English",
+  "todo.settings.general.placeholder": "Language",
+  "todo.settings.general.title": "General",
+  "todo.settings.themes.sticky-header": "Sticky header",
+  "todo.settings.themes.title": "Themes",
+  "todo.settings.themes.placeholder": "Color Theme",
+  "todo.settings.themes.blue": "Blue",
+  "todo.settings.themes.dark": "Dark",
+  "todo.settings.themes.light": "Light",
+  "todo.settings.themes.nature": "Nature",
+  "todo.settings.themes.night-mode": "Auto night mode (from 21:00 to 7:00)",
+  "todo.settings.themes.saneago": "",
+  "todo.settings.animations.title": "Animations",
+  "todo.settings.animations.page": "Navigation whole page transition",
+  "todo.settings.animations.elements": "Navigation page elements slide up"
+}

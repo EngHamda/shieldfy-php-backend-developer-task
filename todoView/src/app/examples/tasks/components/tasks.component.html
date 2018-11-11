@@ -1,0 +1,103 @@
+<div class="container"  *ngIf="(tasks) as taskItems">
+  <h1>{{ 'todo.examples.tasks.title' | translate }}</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{ 'todo.examples.tasks.subtitle1' | translate }}</h2>
+      <mat-card *ngFor="let task of taskItems; let taskKey = index" [ngClass]="routeAnimationsElements"
+                [routerLink]="['/examples/tasks', task._id]" (click)="onSelectTask(task._id, taskKey)"
+                data-testid="tasks-item">
+        <h3 data-testid="item-title">{{task.title}}</h3>
+        <small>{{task.description}}</small>
+      </mat-card>
+      <p *ngIf="(tasks)?.length === 0">{{'todo.examples.tasks.empty' | translate}}</p>
+      <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
+              *ngIf="!isEditing" (click)="addNewTask(taskForm)"
+              data-testid="add-tasks">
+        <fa-icon icon="plus"></fa-icon>
+      </button>
+    </div>
+    <div class="col-md-6">
+      <span class="d-flex justify-content-between">
+        <h2>{{ 'todo.examples.tasks.subtitle2' | translate }}</h2>
+        <span class="d-flex justify-content-end">
+          <span *ngIf="isTaskSelected">
+            <button mat-icon-button color="warn" (click)="onRemoveTask(selectedTask._id, selectedTaskKey)" data-testid="delete-tasks">
+              <fa-icon icon="trash" [matTooltip]="'todo.examples.tasks.tooltip.delete' | translate"
+                       matTooltipPosition="above">
+              </fa-icon>
+            </button>
+            <button mat-icon-button (click)="deselect()">
+              <fa-icon icon="times" [matTooltip]="'todo.examples.tasks.tooltip.deselect' | translate"
+                       matTooltipPosition="above">
+              </fa-icon>
+            </button>
+          </span>
+        </span>
+      </span>
+
+      <form #taskForm="ngForm" [formGroup]="taskFormGroup"
+            [style.display]="isEditing ? 'block' : 'none'"
+            [ngClass]="routeAnimationsElements">
+        <div class="row">
+          <mat-form-field class="col">
+            <input matInput placeholder="{{ 'todo.examples.tasks.placeholder1' | translate }}"
+                   formControlName="title" required autofocus>
+            <mat-error *ngIf="taskFormGroup.get('title').invalid" data-testid="error-title-tasks">
+              {{ 'todo.examples.tasks.placeholder1' | translate }}
+              {{ 'todo.examples.tasks.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <textarea matInput placeholder="{{ 'todo.examples.tasks.placeholder2' | translate }}"
+                      formControlName="description" required rows="5"></textarea>
+            <mat-error *ngIf="taskFormGroup.get('description').invalid" data-testid="error-description-tasks">
+              {{ 'todo.examples.tasks.placeholder2' | translate }}
+              {{ 'todo.examples.tasks.error' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-select placeholder="{{ 'todo.examples.tasks.placeholder3' | translate }}"
+                        formControlName="category_id" required>
+              <!--<mat-option value="">None</mat-option>-->
+              <mat-option *ngFor="let category of categories" [value]="category._id">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <button (click)="save()" mat-raised-button color="primary">
+              {{'todo.examples.tasks.save' | translate }}
+            </button>
+            <button (click)="cancelEditing()" mat-raised-button>
+              {{'todo.examples.tasks.cancel' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div [ngClass]="routeAnimationsElements" *ngIf="!isEditing && isTaskSelected">
+        <h3>{{ selectedTask.title }}</h3>
+        <mat-divider></mat-divider>
+        <p>{{ selectedTask.description }}</p>
+        <mat-divider></mat-divider>
+        <i *ngIf="selectedTask.category">
+          <strong>Category Name: </strong> {{ selectedTask.category.name }}
+        </i>
+        <i *ngIf="!selectedTask.category">
+          <strong>This task not exists in any category </strong>
+        </i>
+      </div>
+
+      <p *ngIf="!isEditing && !isTaskSelected" [ngClass]="routeAnimationsElements">
+        {{'todo.examples.tasks.text' | translate }}.
+      </p>
+
+    </div>
+  </div>
+</div>
