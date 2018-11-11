@@ -21,7 +21,8 @@ use Psy\Util\Json;
 
 class TaskController extends Controller
 {
-    protected $model;
+    protected $task;
+    protected $category;
     protected $log;
     protected $logPath;
     protected $logFile;
@@ -52,9 +53,10 @@ class TaskController extends Controller
     public function index()
     {
         try {
-            $collection = $this->task->with('category')->get();
+            $taskCollection = $this->task->with('category')->get();
+            $categoryCollection = $this->category->get();
             return response()->json(
-                ["status"  => "Success", "message" => "Task List", "data" =>$collection],
+                ["status"  => "Success", "message" => "Task List", "data" =>["tasks" => $taskCollection, "categories" => $categoryCollection]],
                 200
             );
         } catch (\Exception $e) {
@@ -101,7 +103,7 @@ class TaskController extends Controller
     {
         try {
             $validator = Validator::make($request->all(),
-                ['title' => 'required', 'description' => 'required', 'categoryId' => 'required']
+                ['title' => 'required', 'description' => 'required', 'category_id' => 'required']
             );
             if ($validator->fails()) {
                 return response()->json(
@@ -113,12 +115,12 @@ class TaskController extends Controller
                     422
                 );
             }
-            #ASK:in $data why when replace category_id with categoryId (added categoryId,category_id)
-            #,and in relation for get category model must add category_id not categoryId ???
+            #ASK:in $data why when replace category_id with category_id (added category_id,category_id)
+            #,and in relation for get category model must add category_id not category_id ???
             $data = [
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
-                'category_id' => $request->input('categoryId')
+                'category_id' => $request->input('category_id')
             ];
             $categoryObj = $this->category->find($data['category_id']);
             if(empty($categoryObj)){
@@ -226,7 +228,7 @@ class TaskController extends Controller
     {
         try {
             $validator = Validator::make($request->all(),
-                ['title' => 'required', 'description' => 'required', 'categoryId' => 'required']
+                ['title' => 'required', 'description' => 'required', 'category_id' => 'required']
             );
             if ($validator->fails()) {
                 return response()->json(
@@ -241,7 +243,7 @@ class TaskController extends Controller
             $data = [
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
-                'category_id' => $request->input('categoryId')
+                'category_id' => $request->input('category_id')
             ];
             $taskObj = $this->task->find($id);
             if (empty($taskObj)) {
